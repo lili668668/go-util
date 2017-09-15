@@ -12,7 +12,16 @@ func IndexFrom(str string, find string, from int) int {
 }
 
 func Capture(str, start, end string) string {
-	return ""
+	index_start := strings.IndexAny(str, start) + 1
+	index_end := IndexFrom(str, end, index_start)
+	new_str := str[index_start:index_end]
+	return new_str
+}
+
+func CaptureFrom(str string, start string, end string, from int) string {
+	substr := str[from:]
+	new_str := Capture(substr, start, end)
+	return new_str
 }
 
 func TrimAll(origin string) string {

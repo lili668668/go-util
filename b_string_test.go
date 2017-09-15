@@ -37,6 +37,23 @@ func TestCapture(t *testing.T) {
 	}
 }
 
+func TestCaptureFrom(t *testing.T) {
+	t.Log("#Capture 從字串 str 中第 from 個位置以後，把 start 與 end 這兩個子字串中間的字串取出，回傳取出的字串")
+	str := "{asdfsdf}{我是字串}"
+	start := "{"
+	end := "}"
+
+	exp := "我是字串"
+	result := CaptureFrom(str, start, end, 9)
+
+	if result == exp {
+		t.Log("通過")
+	} else {
+		error_str := fmt.Sprintf("錯誤：\nresult: %s", result)
+		t.Error(error_str)
+	}
+}
+
 func TestTrimAll(t *testing.T) {
 	t.Log("#TrimAll 把字串 origin 裡的所有空白全部去除，並回傳全部去除空白的字串")
 	origin := "襪~~  你好owo \t  \n 襪~~~   本寶寶最美    \n    耶 ~~   owo   "
