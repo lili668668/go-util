@@ -37,3 +37,19 @@ func TrimAll(origin string) string {
 	str = strings.Replace(str, "\f", "", -1)
 	return str
 }
+
+func MinIndex(str string, mark1 string, mark2 string) (string, int) {
+	index1 := strings.IndexAny(str, mark1)
+	index2 := strings.IndexAny(str, mark2)
+	if index1 == -1 && index2 == -1 {
+		return "", -1
+	} else if index1 == -1 {
+		return mark2, index2
+	} else if index2 == -1 {
+		return mark1, index1
+	} else if index1 < index2 {
+		return mark1, index1
+	} else {
+		return mark2, index2
+	}
+}

@@ -78,3 +78,33 @@ func TestTrimAll(t *testing.T) {
 		t.Error(error_str)
 	}
 }
+
+func TestMinIndex(t *testing.T) {
+	t.Log("#MinIndex 在 str 中找出兩個不同標記 mark1, mark2 的最小位置，比較兩個位置，回傳比較小的 mark 字串與位置")
+	str1 := "{([fjsdl;kfjas])}"
+	str2 := "{lkdfgjsdfl;g}"
+	str3 := "askdlfaj;sd"
+
+	exp_str1 := "{"
+	exp_str2 := "{"
+	exp_str3 := ""
+	exp_int1 := 0
+	exp_int2 := 0
+	exp_int3 := -1
+
+	res_str1, res_int1 := MinIndex(str1, "{", "[")
+	res_str2, res_int2 := MinIndex(str2, "{", "[")
+	res_str3, res_int3 := MinIndex(str3, "{", "[")
+
+	if res_str1 != exp_str1 || res_int1 != exp_int1 {
+		t.Error("No Pass: result1")
+	}
+
+	if res_str2 != exp_str2 || res_int2 != exp_int2 {
+		t.Error("No Pass: result2")
+	}
+
+	if res_str3 != exp_str3 || res_int3 != exp_int3 {
+		t.Error("No Pass: result3")
+	}
+}

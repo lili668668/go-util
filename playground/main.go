@@ -1,40 +1,27 @@
 package main
 
 import "fmt"
-import "strconv"
 
 type Object struct {
-	type_name string
-	value     string
-}
-
-func (this Object) Value(value interface{}) {
-	switch value.(type) {
-	case *string:
-		*value = this.value
-	case *int:
-		i, _ := strconv.ParseInt(this.value, 10, 64)
-		*value = i
-	case *float32:
-		f, _ := strconv.ParseFloat(this.value, 32)
-		*value = f
-	}
+	value interface{}
 }
 
 func main() {
+	ob1 := Object{1}
+	ob2 := Object{"love"}
+	ob3 := Object{true}
+	ob4 := Object{4.3}
 
-	arr := []Object{Object{"you"}, Object{"1"}, Object{"2.3"}}
+	fmt.Println(ob1.value)
+	fmt.Println(ob2.value)
+	fmt.Println(ob3.value)
+	fmt.Println(ob4.value)
 
-	str := ""
-	num := 0
-	flo := 1.1
+	var arr []interface{}
+	arr = append(arr, true)
+	arr = append(arr, nil)
 
-	arr[0].Value(&str)
-	arr[1].Value(&num)
-	arr[2].Value(&flo)
-
-	fmt.Println(num)
-	fmt.Println(str)
-	fmt.Println(flo)
-
+	for _, e := range arr {
+		fmt.Println(e)
+	}
 }
