@@ -5,26 +5,42 @@ import "errors"
 import "strings"
 import "../b_string"
 
-type Object struct {
-	type_name string
-	value     string
+func ParseToObject(str string) interface{} {
+	obj := make(map[string]interface{})
+	var arr []interface{}
+	var rbc, lbc, rsc, lsc int
+	for pointer := 0; pointer < str; {
+		switch str[pointer] {
+		case "{":
+			substr := b_string.Capture(str, "{", "}")
+			return ParseToObject(substr)
+		case "[":
+			substr := b_string.Capture(str, "[", "]")
+			return ParseToObject(substr)
+		default:
+			mark, index = b_string.MinIndex(str, ":", ",")
+			switch mark {
+			case ":":
+				key := str[pointer:index]
+				value_pointer := index + 1
+				switch mark := str[value_pointer] {
+				case "{" || "[":
+					substr := str[value_pointer:]
+					value_str := FindEndAndCapture(substr, mark)
+					value := ParseToObject(value_str)
+				default:
+
+				}
+
+			case ",":
+			default:
+				return nil
+			}
+		}
+
+	}
 }
 
-func (this Object) String() string {
-	return this.value
-}
+func FindEndAndCapture(str string, mark string) string {
 
-func (this Object) Int() (int, error) {
-	i, err := strconv.ParseInt(this.value, 10, 64)
-	return i, err
-}
-
-func (this Object) Float() (float32, error) {
-	f, err := strconv.ParseFloat(this.value, 32)
-	return f, err
-}
-
-func (this Object) Bool() (bool, error) {
-	b, err := strconv.ParseBool(this.value)
-	return b, err
 }
