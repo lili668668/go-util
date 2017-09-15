@@ -12,9 +12,14 @@ func IndexFrom(str string, find string, from int) int {
 }
 
 func Capture(str, start, end string) string {
-	index_start := strings.IndexAny(str, start) + 1
-	index_end := IndexFrom(str, end, index_start)
-	new_str := str[index_start:index_end]
+	index_start := strings.IndexAny(str, start)
+	index_end := strings.LastIndexAny(str, end)
+
+	if index_start == -1 || index_end == -1 {
+		return str
+	}
+
+	new_str := str[index_start+1 : index_end]
 	return new_str
 }
 

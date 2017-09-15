@@ -22,17 +22,27 @@ func TestIndexFrom(t *testing.T) {
 
 func TestCapture(t *testing.T) {
 	t.Log("#Capture 從字串 str 中，把 start 與 end 這兩個子字串中間的字串取出，回傳取出的字串")
-	str := "{我是字串}"
+	str := "{我是字串{ㄏㄏ}}"
+	str2 := "襪~~~}owo"
 	start := "{"
 	end := "}"
 
-	exp := "我是字串"
+	exp := "我是字串{ㄏㄏ}"
+	exp2 := "襪~~~}owo"
 	result := Capture(str, start, end)
+	result2 := Capture(str2, start, end)
 
 	if result == exp {
 		t.Log("通過")
 	} else {
 		error_str := fmt.Sprintf("錯誤：\nresult: %s", result)
+		t.Error(error_str)
+	}
+
+	if result2 == exp2 {
+		t.Log("通過")
+	} else {
+		error_str := fmt.Sprintf("錯誤：\nresult: %s", result2)
 		t.Error(error_str)
 	}
 }
